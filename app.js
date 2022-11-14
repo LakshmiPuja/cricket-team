@@ -25,7 +25,7 @@ initializeDbServer();
 
 //API 1
 app.get("/players/", async (request, response) => {
-  const getPlayersList = `SELECT * FROM cricket_team ORDER BY player_id;`;
+  const getPlayersList = `SELECT player_id AS playerId,player_name AS playerName,jersey_number AS jerseyNumber,role AS role  FROM cricket_team ORDER BY player_id;`;
   const playersArray = await db.all(getPlayersList);
   response.send(playersArray);
 });
@@ -44,7 +44,7 @@ app.post("/players/", async (request, response) => {
 //API 3
 app.get("/players/:playerId/", async (request, response) => {
   const { playerId } = request.params;
-  const getPlayerQuery = `SELECT * FROM cricket_team WHERE player_id =${playerId};`;
+  const getPlayerQuery = `SELECT player_id AS playerId,player_name AS playerName,jersey_number AS jerseyNumber,role AS role  FROM cricket_team WHERE player_id =${playerId};`;
   const player = await db.get(getPlayerQuery);
   response.send(player);
 });
